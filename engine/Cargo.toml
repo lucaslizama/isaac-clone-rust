@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 bevy = "0.5.0"
 bevy-inspector-egui = "0.6.1"
-single-sprite-demo = {path = "../single-sprite-demo"}
+single-sprite-demo = { path = "../single-sprite-demo" }

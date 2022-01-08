@@ -1,4 +1,3 @@
-use bevy::core::FixedTimestep;
 use bevy::prelude::*;
 use bevy_inspector_egui::WorldInspectorPlugin;
 use systems::*;
@@ -20,12 +19,9 @@ pub fn game() -> AppBuilder {
         })
         .add_plugins(DefaultPlugins)
         .add_plugin(WorldInspectorPlugin::new())
-        .add_startup_system(setup.system())
-        .add_system_set(
-            SystemSet::new()
-                .with_run_criteria(FixedTimestep::step(1. / 60.))
-                .with_system(move_boi.system()),
-        );
+        .add_startup_system(setup_camera.system().label("spawn_camera"))
+        .add_startup_system(setup_boi.system().label("spawn_boi").after("spawn_camera"))
+        .add_system(move_boi.system().label("move_boi"));
 
     builder
 }
